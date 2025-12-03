@@ -14,3 +14,8 @@ The `install.sh` script should fully configure the system. Users should only nee
 - Edit files in this dotfiles repo, not the symlinked config files directly
 - After adding new config files, run `./install.sh` to create symlinks
 - Keep the `.gitignore` updated for files that shouldn't be tracked (e.g., history files)
+
+## Git Commits
+
+- Never mention Claude or AI in commit messages
+- Do not include "Co-Authored-By" or "Generated with" lines
