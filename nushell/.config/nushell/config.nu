@@ -105,3 +105,9 @@ if (which carapace | is-not-empty) {
     carapace _carapace nushell | save -f ~/.cache/carapace.nu
     source ~/.cache/carapace.nu
 }
+
+# Atuin (shell history)
+if (which atuin | is-not-empty) {
+    atuin init nu | save -f ~/.cache/atuin.nu
+    source ~/.cache/atuin.nu
+}

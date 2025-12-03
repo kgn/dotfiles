@@ -10,6 +10,8 @@ pacman_packages=(
     nushell
     stow
     go
+    pass
+    atuin
 )
 
 # Packages from AUR (installed via yay)
@@ -18,6 +20,7 @@ aur_packages=(
     claude-code
     hyprwhspr
     bun-bin
+    carapace-bin
 )
 
 echo "Installing pacman packages..."
