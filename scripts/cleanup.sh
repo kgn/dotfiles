@@ -1,5 +1,5 @@
 #!/bin/bash
-# Remove unwanted packages that come with default Omarchy
+# Remove unwanted packages and web apps that come with default Omarchy
 
 set -e
 
@@ -24,7 +24,24 @@ done
 if [ ${#to_remove[@]} -gt 0 ]; then
     echo "Removing: ${to_remove[*]}"
     sudo pacman -Rns --noconfirm "${to_remove[@]}"
-    echo "Done!"
 else
     echo "No unwanted packages found."
 fi
+
+echo ""
+echo "Removing unwanted web apps..."
+
+webapps=(
+    "HEY"
+    "Basecamp"
+)
+
+for app in "${webapps[@]}"; do
+    desktop_file="$HOME/.local/share/applications/${app}.desktop"
+    if [ -f "$desktop_file" ]; then
+        echo "Removing $app web app..."
+        rm -f "$desktop_file"
+    fi
+done
+
+echo "Done!"
