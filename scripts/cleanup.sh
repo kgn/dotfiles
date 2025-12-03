@@ -1,0 +1,30 @@
+#!/bin/bash
+# Remove unwanted packages that come with default Omarchy
+
+set -e
+
+echo "Removing unwanted packages..."
+
+packages=(
+    1password-beta
+    1password-cli
+    libreoffice-fresh
+    signal-desktop
+    ruby
+)
+
+# Only remove packages that are actually installed
+to_remove=()
+for pkg in "${packages[@]}"; do
+    if pacman -Qi "$pkg" &> /dev/null; then
+        to_remove+=("$pkg")
+    fi
+done
+
+if [ ${#to_remove[@]} -gt 0 ]; then
+    echo "Removing: ${to_remove[*]}"
+    sudo pacman -Rns --noconfirm "${to_remove[@]}"
+    echo "Done!"
+else
+    echo "No unwanted packages found."
+fi
