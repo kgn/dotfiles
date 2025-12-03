@@ -46,9 +46,8 @@ $env.config = {
 
 # ===== Aliases =====
 
-# File system (using eza)
-alias ls = eza -lh --group-directories-first --icons=auto
-alias lsa = eza -lah --group-directories-first --icons=auto
+# File system
+alias la = ls -la
 alias lt = eza --tree --level=2 --long --icons --git
 alias lta = eza --tree --level=2 --long --icons --git -a
 
