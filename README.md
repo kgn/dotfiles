@@ -33,7 +33,7 @@ The install script will:
 | `nushell/` | Nushell config with starship, zoxide, mise |
 | `starship/` | Custom prompt with colored segments |
 | `hyprwhspr/` | Speech-to-text with Caps Lock trigger |
-| `hypr/` | Custom keybindings (VSCode, Gmail, Google Calendar) |
+| `hypr/` | Hyprland overrides (keybindings, rounded corners) |
 | `scripts/` | Package install/cleanup scripts |
 
 ## Keybinding Changes
@@ -83,7 +83,9 @@ dotfiles/
 │   └── env.nu
 ├── starship/.config/starship.toml
 ├── hyprwhspr/.config/hyprwhspr/config.json
-├── hypr/.config/hypr/bindings.conf
+├── hypr/.config/hypr/
+│   ├── bindings.conf
+│   └── looknfeel.conf
 ├── scripts/
 │   ├── packages.sh
 │   └── cleanup.sh
