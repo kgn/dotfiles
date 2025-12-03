@@ -1,0 +1,7 @@
+[
+  {
+    "key": "ctrl+shift+c",
+    "command": "copyRelativeFilePath",
+    "when": "editorFocus"
+  }
+]

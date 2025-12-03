@@ -18,11 +18,6 @@ $env.config = {
         file_format: "sqlite"
     }
 
-    filesize: {
-        metric: true
-        format: "auto"
-    }
-
     cursor_shape: {
         emacs: line
         vi_insert: line
@@ -83,7 +78,7 @@ def n [...args] {
 
 # Open files with default application
 def open [...args] {
-    xdg-open ...$args out+err>| ignore &
+    xdg-open ...$args out+err> /dev/null &
 }
 
 # ===== Integrations =====
@@ -95,19 +90,16 @@ if (which zoxide | is-not-empty) {
 
 # Mise (version manager)
 if (which mise | is-not-empty) {
-    mise activate nu | save -f ~/.cache/mise.nu
     source ~/.cache/mise.nu
 }
 
-# Carapace (completions) - optional
+# Carapace (completions)
 if (which carapace | is-not-empty) {
     $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
-    carapace _carapace nushell | save -f ~/.cache/carapace.nu
     source ~/.cache/carapace.nu
 }
 
 # Atuin (shell history)
 if (which atuin | is-not-empty) {
-    atuin init nu | save -f ~/.cache/atuin.nu
     source ~/.cache/atuin.nu
 }

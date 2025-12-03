@@ -1,0 +1,28 @@
+{
+  "name": "copy-relative-path-scm",
+  "displayName": "Copy Relative Path from SCM",
+  "description": "Adds Copy Relative Path to Source Control context menu",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "copy-relative-path-scm.copyRelativePath",
+        "title": "Copy Relative Path"
+      }
+    ],
+    "menus": {
+      "scm/resourceState/context": [
+        {
+          "command": "copy-relative-path-scm.copyRelativePath",
+          "group": "5_cutcopypaste"
+        }
+      ]
+    }
+  }
+}

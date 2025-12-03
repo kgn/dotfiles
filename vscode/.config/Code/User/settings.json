@@ -1,0 +1,43 @@
+{
+  "update.mode": "none",
+  "workbench.colorTheme": "Tokyo Night",
+
+  // Minimal UI - no title bar, no window controls
+  "window.titleBarStyle": "native",
+  "window.menuBarVisibility": "hidden",
+  "window.customTitleBarVisibility": "never",
+  "workbench.layoutControl.enabled": false,
+  "window.commandCenter": false,
+  "editor.minimap.enabled": false,
+  "breadcrumbs.enabled": false,
+  "editor.scrollbar.vertical": "hidden",
+  "editor.scrollbar.horizontal": "hidden",
+  "workbench.statusBar.visible": false,
+  "workbench.editor.showTabs": "none",
+
+  // Activity bar icons at top of sidebar
+  "workbench.activityBar.location": "top",
+  "workbench.sideBar.location": "left",
+  "workbench.startupEditor": "none",
+  "workbench.view.alwaysShowHeaderActions": true,
+  "scm.defaultViewMode": "tree",
+  "workbench.panel.defaultLocation": "right",
+
+  // Editor padding
+  "editor.padding.top": 16,
+  "editor.padding.bottom": 16,
+
+  // Diff view
+  "diffEditor.renderSideBySide": false,
+
+  // Custom UI Style - hide window controls and title bar elements
+  "custom-ui-style.electron": {
+    "frame": false,
+    "titleBarStyle": "hidden"
+  },
+  "custom-ui-style.stylesheet": {
+    ".window-controls-container": "display: none !important;",
+    ".titlebar-right": "display: none !important;",
+    ".titlebar-container": "display: none !important;"
+  }
+}

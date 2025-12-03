@@ -32,11 +32,21 @@ $env.PROMPT_MULTILINE_INDICATOR = "::: "
 # Mise (polyglot version manager)
 if (which mise | is-not-empty) {
     $env.MISE_SHELL = "nu"
-    let mise_path = (which mise | get path.0)
     $env.PATH = ($env.PATH | prepend ($env.HOME | path join ".local/share/mise/shims"))
+    mise activate nu | lines | where { |line| not ($line starts-with "set,") and not ($line starts-with "hide,") } | str join "\n" | save -f ~/.cache/mise.nu
 }
 
 # Zoxide
 if (which zoxide | is-not-empty) {
     zoxide init nushell | save -f ~/.cache/zoxide.nu
+}
+
+# Carapace (completions)
+if (which carapace | is-not-empty) {
+    carapace _carapace nushell | save -f ~/.cache/carapace.nu
+}
+
+# Atuin (shell history)
+if (which atuin | is-not-empty) {
+    atuin init nu | save -f ~/.cache/atuin.nu
 }

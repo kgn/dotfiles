@@ -1,48 +1,32 @@
 add_newline = true
 command_timeout = 200
-format = """
-$directory\
-$git_branch\
-$git_status\
-$fill\
-$cmd_duration\
-$line_break\
-$character"""
-
-[fill]
-symbol = " "
+format = "[$directory$git_branch$git_status]($style)$character"
 
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
+error_symbol = "[✗](bold cyan)"
+success_symbol = "[❯](bold cyan)"
 
 [directory]
-format = "[ $path ]($style)"
-style = "bold bg:#7aa2f7 fg:#1a1b26"
-truncation_length = 3
+truncation_length = 2
 truncation_symbol = "…/"
-read_only = " 󰌾"
+repo_root_style = "bold cyan"
+repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
 
 [git_branch]
-format = "[ $symbol$branch ]($style)"
-style = "bold bg:#9ece6a fg:#1a1b26"
-symbol = " "
+format = "[$branch]($style) "
+style = "italic cyan"
 
 [git_status]
-format = "[$all_status$ahead_behind]($style)"
-style = "bold bg:#e0af68 fg:#1a1b26"
-ahead = " ⇡${count}"
-behind = " ⇣${count}"
-diverged = " ⇕⇡${ahead_count}⇣${behind_count}"
-conflicted = " ="
-untracked = " ?"
-modified = " !"
-stashed = " $"
-staged = " +"
-renamed = " »"
-deleted = " ✘"
-
-[cmd_duration]
-format = "[ 󰔚 $duration ]($style)"
-style = "bold bg:#bb9af7 fg:#1a1b26"
-min_time = 2000
+format     = '[$all_status]($style)'
+style      = "cyan"
+ahead      = "⇡${count} "
+diverged   = "⇕⇡${ahead_count}⇣${behind_count} "
+behind     = "⇣${count} "
+conflicted = " "
+up_to_date = " "
+untracked  = "? "
+modified   = " "
+stashed    = ""
+staged     = ""
+renamed    = ""
+deleted    = ""

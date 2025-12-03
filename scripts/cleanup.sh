@@ -10,6 +10,7 @@ packages=(
     1password-cli
     libreoffice-fresh
     signal-desktop
+    tobi-try
     ruby
 )
 
