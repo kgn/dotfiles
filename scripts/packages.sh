@@ -9,7 +9,6 @@ echo "Installing additional packages..."
 pacman_packages=(
     nushell
     stow
-    go
     pass
     atuin
     protobuf
@@ -20,7 +19,6 @@ aur_packages=(
     visual-studio-code-bin
     claude-code
     hyprwhspr
-    bun-bin
     carapace-bin
 )
 
@@ -33,9 +31,11 @@ sudo pacman -S --noconfirm --needed "${pacman_packages[@]}"
 echo "Installing AUR packages..."
 yay -S --noconfirm --needed "${aur_packages[@]}"
 
-echo "Installing Go tools..."
-go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+echo "Installing mise-managed runtimes (go, bun) and Go tools..."
+cd ~/Developer/omarchy
+mise install
+mise exec -- go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+mise exec -- go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
 echo "Installing VS Code extensions..."
 code --install-extension enkia.tokyo-night
