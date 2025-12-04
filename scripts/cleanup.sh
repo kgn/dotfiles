@@ -8,7 +8,9 @@ echo "Removing unwanted packages..."
 packages=(
     1password-beta
     1password-cli
+    bitwarden
     libreoffice-fresh
+    obsidian
     signal-desktop
     tobi-try
     ruby
