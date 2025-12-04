@@ -21,6 +21,12 @@
   "workbench.startupEditor": "none",
   "workbench.view.alwaysShowHeaderActions": true,
   "scm.defaultViewMode": "tree",
+  "scm.showInputActionButton": false,
+  "git.showActionButton": {
+    "commit": false,
+    "publish": false,
+    "sync": false
+  },
   "workbench.panel.defaultLocation": "right",
 
   // Editor padding
@@ -30,6 +36,17 @@
   // Diff view
   "diffEditor.renderSideBySide": false,
 
+  // Git decoration colors - distinguish staged vs unstaged
+  "workbench.colorCustomizations": {
+    "gitDecoration.modifiedResourceForeground": "#e0af68",
+    "gitDecoration.stagedModifiedResourceForeground": "#9ece6a",
+    "gitDecoration.stagedAddedResourceForeground": "#9ece6a",
+    "gitDecoration.stagedDeletedResourceForeground": "#9ece6a",
+    "gitDecoration.untrackedResourceForeground": "#7aa2f7",
+    "gitDecoration.addedResourceForeground": "#73daca",
+    "gitDecoration.deletedResourceForeground": "#f7768e"
+  },
+
   // Custom UI Style - hide window controls and title bar elements
   "custom-ui-style.electron": {
     "frame": false,
@@ -38,6 +55,11 @@
   "custom-ui-style.stylesheet": {
     ".window-controls-container": "display: none !important;",
     ".titlebar-right": "display: none !important;",
-    ".titlebar-container": "display: none !important;"
+    ".titlebar-container": "display: none !important;",
+    ".scm-provider .actions .action-item:not(.scm-status-bar-action)": "display: none !important;",
+    ".scm-provider .actions .codicon-sync": "display: none !important;",
+    ".codicon-git-branch-staged-changes + span": "color: #9ece6a !important;",
+    ".codicon-git-branch-modified + span": "color: #e0af68 !important;",
+    ".scm-editor-container": "display: none !important;"
   }
 }

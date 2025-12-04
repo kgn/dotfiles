@@ -1,0 +1,14 @@
+{
+  "name": "hide-scm-input",
+  "displayName": "Hide SCM Input",
+  "description": "Hides the commit message input box in Source Control view",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {}
+}
