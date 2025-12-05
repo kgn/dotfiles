@@ -1,0 +1,35 @@
+#!/bin/bash
+# Speak permission request messages using Piper TTS
+# Triggered via Claude Code PermissionRequest hook
+
+# Read hook input from stdin, then fork to background
+input=$(cat)
+
+# Debug: log input to file
+echo "$(date): $input" >> /tmp/speak-permission-debug.log
+
+# Mark that we're speaking a permission (for Stop hook coordination)
+echo $$ > /tmp/speak-permission-active
+
+(
+PIPER_VOICE="$HOME/.local/share/piper/voices/en_US-lessac-medium.onnx"
+TMP_WAV="/tmp/speak-permission-$$.wav"
+
+tool_name=$(echo "$input" | jq -r '.tool_name // empty')
+description=$(echo "$input" | jq -r '.tool_input.description // empty')
+command=$(echo "$input" | jq -r '.tool_input.command // empty')
+
+if [ -z "$tool_name" ]; then
+    exit 0
+fi
+
+# Use description directly, fallback to tool name
+message="${description:-Requesting permission to use $tool_name}"
+
+# Speak with Piper
+echo "$message" | piper-tts --model "$PIPER_VOICE" --length_scale 0.8 \
+    --output_file "$TMP_WAV" 2>/dev/null && pw-play "$TMP_WAV"
+
+# Clean up marker
+rm -f /tmp/speak-permission-active
+) &

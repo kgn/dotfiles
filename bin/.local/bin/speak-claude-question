@@ -1,0 +1,30 @@
+#!/bin/bash
+# Summarize and speak Claude's question using Haiku + Piper TTS
+# Triggered via Claude Code PreToolUse hook on AskUserQuestion
+
+# Read hook input from stdin, then fork to background
+input=$(cat)
+
+(
+PIPER_VOICE="$HOME/.local/share/piper/voices/en_US-lessac-medium.onnx"
+TMP_WAV="/tmp/speak-question-$$.wav"
+
+question=$(echo "$input" | jq -r '.tool_input.questions[0].question // empty')
+
+if [ -z "$question" ]; then
+    exit 0
+fi
+
+# Summarize long questions with Claude CLI
+if [ ${#question} -gt 100 ]; then
+    summary=$(echo "Summarize this question briefly for text-to-speech (one sentence max, output ONLY the summary): $question" | claude --print --model haiku 2>/dev/null)
+
+    if [ -n "$summary" ]; then
+        question="$summary"
+    fi
+fi
+
+# Speak with Piper
+echo "$question" | piper-tts --model "$PIPER_VOICE" --length_scale 0.8 \
+    --output_file "$TMP_WAV" 2>/dev/null && pw-play "$TMP_WAV"
+) &
