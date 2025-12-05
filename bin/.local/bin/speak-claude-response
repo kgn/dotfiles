@@ -5,12 +5,24 @@
 # Read hook input from stdin, then fork to background
 input=$(cat)
 
+# Debug: log invocations
+echo "$(date): Stop hook called" >> /tmp/speak-response-debug.log
+
 # Skip if permission hook just spoke (avoid double-read on rejected permissions)
 if [ -f /tmp/speak-permission-active ]; then
-    # Wait briefly for permission speech to finish, then exit
     sleep 0.5
     exit 0
 fi
+
+# Debounce: skip if we spoke within last 5 seconds
+LOCKFILE="/tmp/speak-response-lock"
+if [ -f "$LOCKFILE" ]; then
+    lock_age=$(($(date +%s) - $(stat -c %Y "$LOCKFILE")))
+    if [ "$lock_age" -lt 5 ]; then
+        exit 0
+    fi
+fi
+touch "$LOCKFILE"
 
 (
 PIPER_VOICE="$HOME/.local/share/piper/voices/en_US-lessac-medium.onnx"
