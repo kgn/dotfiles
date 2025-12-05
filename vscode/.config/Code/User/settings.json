@@ -56,10 +56,11 @@
     ".window-controls-container": "display: none !important;",
     ".titlebar-right": "display: none !important;",
     ".titlebar-container": "display: none !important;",
-    ".scm-provider .actions .action-item:not(.scm-status-bar-action)": "display: none !important;",
     ".scm-provider .actions .codicon-sync": "display: none !important;",
+    ".scm-provider .actions .codicon-check": "display: none !important;",
+    ".scm-provider .actions .codicon-refresh": "display: none !important;",
+    ".scm-input": "display: none !important;",
     ".codicon-git-branch-staged-changes + span": "color: #9ece6a !important;",
-    ".codicon-git-branch-modified + span": "color: #e0af68 !important;",
-    ".scm-editor": "border: none !important;"
+    ".codicon-git-branch-changes + span": "color: #e0af68 !important;"
   }
 }
