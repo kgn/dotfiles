@@ -136,5 +136,4 @@ Workarounds or features waiting on upstream changes:
 
 | Issue | Description | Status |
 |-------|-------------|--------|
-| [Hide SCM Input Box](vscode/feature-requests/hide-scm-input-box.md) | Cannot fully hide commit input boxes in VS Code Source Control panel - CSS hides content but 34px gap remains per repo | [vscode#281562](https://github.com/microsoft/vscode/issues/281562) |
-| [hyprwhspr Extended Key Support](feature-requests/hyprwhspr-key-grabbing.md) | Punctuation key support, shortcut key suppression, and exact modifier matching for SUPER+. dictation | [PR #33](https://github.com/goodroot/hyprwhspr/pull/33) |
+| [Hide SCM Input Box](vscode/feature-requests/hide-scm-input-box.md) | Cannot fully hide commit input boxes in VS Code Source Control panel - CSS hides content but 34px gap remains per repo | [PR #281627](https://github.com/microsoft/vscode/pull/281627) |

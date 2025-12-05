@@ -1,10 +1,11 @@
 # Feature Request: Hide SCM Input Box
 
-## Status: Submitted
+## Status: PR Submitted
 
 - **VS Code Issue**: https://github.com/microsoft/vscode/issues/281562
+- **VS Code PR**: https://github.com/microsoft/vscode/pull/281627
 - **Submitted**: 2025-12-05
-- **Status**: Open
+- **Status**: Awaiting Review
 
 ---
 
