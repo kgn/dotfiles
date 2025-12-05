@@ -1,0 +1,19 @@
+#!/bin/bash
+# Read selected text aloud using Piper TTS
+# Uses primary selection (highlighted text) on Wayland
+
+PIPER_VOICE="$HOME/.local/share/piper/voices/en_US-lessac-medium.onnx"
+TMP_WAV="/tmp/speak-selection-$$.wav"
+
+# Kill any existing piper/pw-play process (toggle behavior - press again to stop)
+pkill -f "piper-tts.*lessac" 2>/dev/null && exit 0
+pkill -f "pw-play.*/tmp/speak-selection" 2>/dev/null && exit 0
+
+# Get primary selection (highlighted text)
+text=$(wl-paste --primary 2>/dev/null)
+
+if [ -n "$text" ]; then
+    # Generate audio to temp file and play with PipeWire
+    echo "$text" | piper-tts --model "$PIPER_VOICE" --length_scale 0.8 --output_file "$TMP_WAV" 2>/dev/null && \
+        pw-play "$TMP_WAV" &
+fi

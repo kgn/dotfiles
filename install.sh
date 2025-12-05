@@ -23,7 +23,7 @@ echo ""
 echo "Step 3: Stowing config files..."
 cd "$DOTFILES_DIR"
 
-packages=(bash nushell starship hyprwhspr vscode mise)
+packages=(bash nushell starship hyprwhspr vscode mise bin)
 
 for package in "${packages[@]}"; do
     if [ -d "$package" ]; then

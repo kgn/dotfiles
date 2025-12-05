@@ -1,0 +1,32 @@
+#!/bin/bash
+# Switch Bluetooth headphones to headset mode (enables microphone)
+# Usage: bt-headset-mode [on|off]
+#   on  = Switch to headset mode (mic enabled, lower audio quality)
+#   off = Switch to A2DP mode (high quality audio, no mic)
+
+# Find the first connected Bluetooth audio device
+card=$(pactl list cards short | grep bluez | head -1 | cut -f2)
+
+if [ -z "$card" ]; then
+    echo "No Bluetooth audio device found"
+    exit 1
+fi
+
+device_name=$(pactl list cards | grep -A 20 "$card" | grep "device.description" | cut -d'"' -f2)
+
+case "${1:-on}" in
+    on|headset|mic)
+        pactl set-card-profile "$card" headset-head-unit
+        echo "Switched '$device_name' to headset mode (mic enabled)"
+        ;;
+    off|a2dp|hifi)
+        pactl set-card-profile "$card" a2dp-sink
+        echo "Switched '$device_name' to A2DP mode (high quality audio)"
+        ;;
+    *)
+        echo "Usage: bt-headset-mode [on|off]"
+        echo "  on  - Enable mic (headset mode)"
+        echo "  off - High quality audio (A2DP mode)"
+        exit 1
+        ;;
+esac

@@ -1,5 +1,7 @@
 {
-    "primary_shortcut": "SUPER+ALT+D",
+    "primary_shortcut": "SUPER+.",
     "model": "base.en",
-    "audio_feedback": true
+    "audio_feedback": true,
+    "push_to_talk": true,
+    "grab_keys": true
 }

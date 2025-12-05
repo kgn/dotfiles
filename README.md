@@ -36,6 +36,7 @@ The install script will:
 | `hypr/` | Hyprland overrides (keybindings, rounded corners) |
 | `vscode/` | VS Code settings (minimal UI, git colors, custom styles) |
 | `mise/` | Runtime version management (Go, Bun) |
+| `bin/` | Custom scripts (~/.local/bin) |
 | `scripts/` | Package install/cleanup scripts |
 
 ## Keybinding Changes
@@ -50,6 +51,8 @@ Changed:
 
 Added:
 - `SUPER SHIFT + V` - VSCode
+- `SUPER + .` - Dictation (hold to record, release to transcribe)
+- `SUPER + SHIFT + .` - Speak selected text via [Piper TTS](https://github.com/rhasspy/piper) (press again to stop)
 
 ## Update
 
@@ -58,6 +61,34 @@ cd ~/dotfiles
 git pull
 ./install.sh
 ```
+
+## Bluetooth Headset Mic
+
+To use a Bluetooth headset's microphone (for dictation/speech-to-text):
+
+```bash
+bt-headset-mode on   # Enable mic (lower audio quality)
+bt-headset-mode off  # High quality audio (no mic)
+```
+
+Note: Bluetooth can't do high quality audio AND mic simultaneously.
+
+## Dictation Customization
+
+hyprwhspr supports word corrections and custom prompts in `~/.config/hyprwhspr/config.json`:
+
+```json
+{
+    "word_overrides": {
+        "val runner": "val-runner",
+        "hyper whisper": "hyprwhspr"
+    },
+    "whisper_prompt": "Transcribe code terms: val-runner, hyprwhspr, Hyprland."
+}
+```
+
+- **word_overrides** - Auto-replace transcribed words (corrections file)
+- **whisper_prompt** - Guide Whisper with context about expected terms
 
 ## Manual Commands
 
@@ -106,3 +137,4 @@ Workarounds or features waiting on upstream changes:
 | Issue | Description | Status |
 |-------|-------------|--------|
 | [Hide SCM Input Box](vscode/feature-requests/hide-scm-input-box.md) | Cannot fully hide commit input boxes in VS Code Source Control panel - CSS hides content but 34px gap remains per repo | [vscode#281562](https://github.com/microsoft/vscode/issues/281562) |
+| [hyprwhspr Extended Key Support](feature-requests/hyprwhspr-key-grabbing.md) | Punctuation key support, shortcut key suppression, and exact modifier matching for SUPER+. dictation | [PR #33](https://github.com/goodroot/hyprwhspr/pull/33) |
