@@ -32,7 +32,6 @@ echo "Installing AUR packages..."
 yay -S --noconfirm --needed "${aur_packages[@]}"
 
 echo "Installing mise-managed runtimes (go, bun) and Go tools..."
-cd ~/Developer/omarchy
 mise install
 mise exec -- go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 mise exec -- go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest

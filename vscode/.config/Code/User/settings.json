@@ -60,6 +60,6 @@
     ".scm-provider .actions .codicon-sync": "display: none !important;",
     ".codicon-git-branch-staged-changes + span": "color: #9ece6a !important;",
     ".codicon-git-branch-modified + span": "color: #e0af68 !important;",
-    ".scm-editor-container": "display: none !important;"
+    ".scm-editor": "border: none !important;"
   }
 }

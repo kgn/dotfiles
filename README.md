@@ -34,6 +34,8 @@ The install script will:
 | `starship/` | Custom prompt with colored segments |
 | `hyprwhspr/` | Speech-to-text with Caps Lock trigger |
 | `hypr/` | Hyprland overrides (keybindings, rounded corners) |
+| `vscode/` | VS Code settings (minimal UI, git colors, custom styles) |
+| `mise/` | Runtime version management (Go, Bun) |
 | `scripts/` | Package install/cleanup scripts |
 
 ## Keybinding Changes
@@ -86,9 +88,21 @@ dotfiles/
 ├── hypr/.config/hypr/
 │   ├── bindings.conf
 │   └── looknfeel.conf
+├── vscode/.config/Code/User/
+│   └── settings.json
+├── mise/.config/mise/
+│   └── config.toml
 ├── scripts/
 │   ├── packages.sh
 │   └── cleanup.sh
 ├── install.sh
 └── README.md
 ```
+
+## Outstanding Enhancements
+
+Workarounds or features waiting on upstream changes:
+
+| Issue | Description | Status |
+|-------|-------------|--------|
+| [Hide SCM Input Box](vscode/feature-requests/hide-scm-input-box.md) | Cannot fully hide commit input boxes in VS Code Source Control panel - CSS hides content but 34px gap remains per repo | [vscode#281562](https://github.com/microsoft/vscode/issues/281562) |
