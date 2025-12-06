@@ -2,6 +2,9 @@
 # Summarize and speak Claude's question using Haiku + Piper TTS
 # Triggered via Claude Code PreToolUse hook on AskUserQuestion
 
+# Skip if TTS is disabled
+[ "$CLAUDE_TTS_DISABLED" = "1" ] && exit 0
+
 # Read hook input from stdin, then fork to background
 input=$(cat)
 
@@ -17,7 +20,7 @@ fi
 
 # Summarize long questions with Claude CLI
 if [ ${#question} -gt 100 ]; then
-    summary=$(echo "Summarize this question briefly for text-to-speech (one sentence max, output ONLY the summary): $question" | claude --print --model haiku 2>/dev/null)
+    summary=$(echo "Summarize this question briefly for text-to-speech (one sentence max, output ONLY the summary): $question" | CLAUDE_TTS_DISABLED=1 claude --print --model haiku 2>/dev/null)
 
     if [ -n "$summary" ]; then
         question="$summary"
@@ -28,3 +31,4 @@ fi
 echo "$question" | piper-tts --model "$PIPER_VOICE" --length_scale 0.8 \
     --output_file "$TMP_WAV" 2>/dev/null && pw-play "$TMP_WAV"
 ) &
+disown

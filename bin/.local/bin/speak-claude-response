@@ -2,6 +2,9 @@
 # Speak Claude's last response using Piper TTS
 # Triggered via Claude Code Stop hook
 
+# Skip if TTS is disabled
+[ "$CLAUDE_TTS_DISABLED" = "1" ] && exit 0
+
 # Read hook input from stdin, then fork to background
 input=$(cat)
 
@@ -43,7 +46,7 @@ fi
 
 # Summarize long responses with Claude CLI
 if [ ${#text} -gt 200 ]; then
-    summary=$(echo "Summarize this response briefly for text-to-speech (2-3 sentences max, output ONLY the summary): $text" | claude --print --model haiku 2>/dev/null)
+    summary=$(echo "Summarize this response briefly for text-to-speech (2-3 sentences max, output ONLY the summary): $text" | CLAUDE_TTS_DISABLED=1 claude --print --model haiku 2>/dev/null)
 
     if [ -n "$summary" ]; then
         text="$summary"
@@ -54,3 +57,4 @@ fi
 echo "$text" | piper-tts --model "$PIPER_VOICE" --length_scale 0.8 \
     --output_file "$TMP_WAV" 2>/dev/null && pw-play "$TMP_WAV"
 ) &
+disown

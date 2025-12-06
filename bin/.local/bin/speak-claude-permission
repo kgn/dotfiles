@@ -2,6 +2,9 @@
 # Speak permission request messages using Piper TTS
 # Triggered via Claude Code PermissionRequest hook
 
+# Skip if TTS is disabled
+[ "$CLAUDE_TTS_DISABLED" = "1" ] && exit 0
+
 # Read hook input from stdin, then fork to background
 input=$(cat)
 
@@ -33,3 +36,4 @@ echo "$message" | piper-tts --model "$PIPER_VOICE" --length_scale 0.8 \
 # Clean up marker
 rm -f /tmp/speak-permission-active
 ) &
+disown
