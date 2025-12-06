@@ -35,8 +35,8 @@ for package in "${packages[@]}"; do
         echo "  Stowing $package..."
         # First unstow to clean up any existing links
         stow -D --target="$HOME" "$package" 2>/dev/null || true
-        # Then stow fresh (without --adopt to avoid overwriting dotfiles)
-        stow -v --target="$HOME" "$package"
+        # Then stow fresh (ignore setup.sh scripts which are run separately)
+        stow -v --ignore='setup\.sh' --target="$HOME" "$package"
     fi
 done
 

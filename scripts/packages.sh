@@ -12,6 +12,7 @@ pacman_packages=(
     pass
     atuin
     protobuf
+    kubectl
 )
 
 # Packages from AUR (installed via yay)
@@ -21,6 +22,7 @@ aur_packages=(
     hyprwhspr
     carapace-bin
     piper-tts-bin
+    kind
 )
 
 echo "Syncing package database..."

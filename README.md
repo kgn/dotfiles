@@ -36,6 +36,8 @@ The install script will:
 | `hypr/` | Hyprland overrides (keybindings, rounded corners) |
 | `vscode/` | VS Code settings (minimal UI, git colors, custom styles) |
 | `mise/` | Runtime version management (Go, Bun) |
+| `claude/` | Claude Code settings and TTS hooks |
+| `piper/` | Piper TTS voice setup |
 | `bin/` | Custom scripts (~/.local/bin) |
 | `scripts/` | Package install/cleanup scripts |
 
@@ -90,6 +92,37 @@ hyprwhspr supports word corrections and custom prompts in `~/.config/hyprwhspr/c
 - **word_overrides** - Auto-replace transcribed words (corrections file)
 - **whisper_prompt** - Guide Whisper with context about expected terms
 
+## Claude Code Hooks
+
+Claude Code is configured with hooks that use [Piper TTS](https://github.com/rhasspy/piper) to speak aloud:
+
+| Hook | Trigger | Behavior |
+|------|---------|----------|
+| `PreToolUse` | AskUserQuestion tool | Speaks the question (summarized via Haiku if >100 chars) |
+| `PermissionRequest` | Any permission prompt | Speaks the tool description |
+| `Stop` | Response complete | Speaks the response (summarized via Haiku if >200 chars) |
+
+This enables hands-free awareness of Claude's status while multitasking.
+
+Configuration in `~/.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [{
+      "matcher": "AskUserQuestion",
+      "hooks": [{ "type": "command", "command": "speak-claude-question" }]
+    }],
+    "PermissionRequest": [{
+      "hooks": [{ "type": "command", "command": "speak-claude-permission" }]
+    }],
+    "Stop": [{
+      "hooks": [{ "type": "command", "command": "speak-claude-response" }]
+    }]
+  }
+}
+```
+
 ## Manual Commands
 
 ```bash
@@ -123,6 +156,14 @@ dotfiles/
 │   └── settings.json
 ├── mise/.config/mise/
 │   └── config.toml
+├── claude/.claude/
+│   └── settings.json
+├── piper/
+│   └── setup.sh
+├── bin/.local/bin/
+│   ├── bt-headset-mode
+│   ├── speak-selection
+│   └── speak-claude-*
 ├── scripts/
 │   ├── packages.sh
 │   └── cleanup.sh
@@ -136,4 +177,4 @@ Workarounds or features waiting on upstream changes:
 
 | Issue | Description | Status |
 |-------|-------------|--------|
-| [Hide SCM Input Box](vscode/feature-requests/hide-scm-input-box.md) | Cannot fully hide commit input boxes in VS Code Source Control panel - CSS hides content but 34px gap remains per repo | [PR #281627](https://github.com/microsoft/vscode/pull/281627) |
+| [Hide SCM Input Box](feature-requests/hide-scm-input-box.md) | Cannot fully hide commit input boxes in VS Code Source Control panel - CSS hides content but 34px gap remains per repo | [PR #281627](https://github.com/microsoft/vscode/pull/281627) |
