@@ -8,9 +8,6 @@
 # Read hook input from stdin, then fork to background
 input=$(cat)
 
-# Debug: log invocations
-echo "$(date): Stop hook called" >> /tmp/speak-response-debug.log
-
 # Skip if permission hook just spoke (avoid double-read on rejected permissions)
 if [ -f /tmp/speak-permission-active ]; then
     sleep 0.5
@@ -56,5 +53,4 @@ fi
 # Speak with Piper
 echo "$text" | piper-tts --model "$PIPER_VOICE" --length_scale 0.8 \
     --output_file "$TMP_WAV" 2>/dev/null && pw-play "$TMP_WAV"
-) &
-disown
+) >/dev/null 2>&1 &

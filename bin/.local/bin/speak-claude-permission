@@ -8,9 +8,6 @@
 # Read hook input from stdin, then fork to background
 input=$(cat)
 
-# Debug: log input to file
-echo "$(date): $input" >> /tmp/speak-permission-debug.log
-
 # Mark that we're speaking a permission (for Stop hook coordination)
 echo $$ > /tmp/speak-permission-active
 
@@ -27,7 +24,7 @@ if [ -z "$tool_name" ]; then
 fi
 
 # Use description directly, fallback to tool name
-message="${description:-Requesting permission to use $tool_name}"
+message="Permission request: ${description:-$tool_name}"
 
 # Speak with Piper
 echo "$message" | piper-tts --model "$PIPER_VOICE" --length_scale 0.8 \
@@ -35,5 +32,4 @@ echo "$message" | piper-tts --model "$PIPER_VOICE" --length_scale 0.8 \
 
 # Clean up marker
 rm -f /tmp/speak-permission-active
-) &
-disown
+) >/dev/null 2>&1 &
