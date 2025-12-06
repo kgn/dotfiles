@@ -5,14 +5,19 @@ set -e
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+# Use clean environment to avoid mise Node conflicts with VS Code's bundled Node
+install_ext() {
+    env -i HOME="$HOME" PATH="/usr/local/bin:/usr/bin:/bin" code --install-extension "$1" || true
+}
+
 echo "Installing VS Code extensions..."
-code --install-extension enkia.tokyo-night
-code --install-extension subframe7536.custom-ui-style
-code --install-extension golang.go
-code --install-extension ms-python.python
-code --install-extension dbaeumer.vscode-eslint
-code --install-extension esbenp.prettier-vscode
-code --install-extension ms-azuretools.vscode-docker
+install_ext enkia.tokyo-night
+install_ext subframe7536.custom-ui-style
+install_ext golang.go
+install_ext ms-python.python
+install_ext dbaeumer.vscode-eslint
+install_ext esbenp.prettier-vscode
+install_ext ms-azuretools.vscode-docker
 
 # Grant permissions for Custom UI Style extension to modify VS Code
 if [ -d "/opt/visual-studio-code/resources/app" ]; then
