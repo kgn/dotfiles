@@ -27,7 +27,7 @@ fi
 message="Permission request: ${description:-$tool_name}"
 
 # Speak with Piper
-echo "$message" | piper-tts --model "$PIPER_VOICE" --length_scale 0.8 \
+echo "$message" | piper-tts --model "$PIPER_VOICE" --length_scale 0.7 \
     --output_file "$TMP_WAV" 2>/dev/null && pw-play "$TMP_WAV"
 
 # Clean up marker
