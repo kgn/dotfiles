@@ -29,7 +29,8 @@
   },
   "workbench.panel.defaultLocation": "right",
 
-  // Editor padding
+  // Editor settings
+  "editor.fontSize": 12,
   "editor.padding.top": 16,
   "editor.padding.bottom": 16,
 
