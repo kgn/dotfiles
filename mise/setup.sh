@@ -11,3 +11,4 @@ mise exec -- go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 mise exec -- go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 mise exec -- go install honnef.co/go/tools/cmd/staticcheck@latest
 mise exec -- go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+mise exec -- go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
