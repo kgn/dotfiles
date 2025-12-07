@@ -9,4 +9,9 @@ source ~/.local/share/omarchy/default/bash/rc
 #
 # Make an alias for invoking commands you use constantly
 # alias p='python'
+
 export PATH="$HOME/.local/bin:$PATH"
+
+# Go module proxy - uses local Athens cache if running, falls back to public proxy
+# Start cache: ~/Development/newco-fintech/dev-tooling/local-cache/setup.sh
+export GOPROXY=http://localhost:3000,https://proxy.golang.org,direct
