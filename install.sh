@@ -64,12 +64,17 @@ echo ""
 echo "Step 7: Setting up hyprwhspr..."
 "$DOTFILES_DIR/hyprwhspr/setup.sh"
 
-# Step 8: Set nushell as default shell
+# Step 8: Setup Docker daemon config
+echo ""
+echo "Step 8: Setting up Docker..."
+"$DOTFILES_DIR/docker/setup.sh"
+
+# Step 9: Set nushell as default shell
 if command -v nu &> /dev/null; then
     current_shell=$(getent passwd "$USER" | cut -d: -f7)
     if [ "$current_shell" != "/usr/bin/nu" ]; then
         echo ""
-        echo "Step 8: Setting nushell as default shell..."
+        echo "Step 9: Setting nushell as default shell..."
         sudo chsh -s /usr/bin/nu "$USER"
     fi
 fi
