@@ -12,23 +12,18 @@ input=$(cat)
 echo $$ > /tmp/speak-permission-active
 
 (
-PIPER_VOICE="$HOME/.local/share/piper/voices/en_US-lessac-medium.onnx"
-TMP_WAV="/tmp/speak-permission-$$.wav"
-
 tool_name=$(echo "$input" | jq -r '.tool_name // empty')
 description=$(echo "$input" | jq -r '.tool_input.description // empty')
-command=$(echo "$input" | jq -r '.tool_input.command // empty')
 
 if [ -z "$tool_name" ]; then
+    rm -f /tmp/speak-permission-active
     exit 0
 fi
 
 # Use description directly, fallback to tool name
 message="Permission request: ${description:-$tool_name}"
 
-# Speak with Piper
-echo "$message" | piper-tts --model "$PIPER_VOICE" --length_scale 0.7 \
-    --output_file "$TMP_WAV" 2>/dev/null && pw-play "$TMP_WAV"
+echo "$message" | piper-speak
 
 # Clean up marker
 rm -f /tmp/speak-permission-active

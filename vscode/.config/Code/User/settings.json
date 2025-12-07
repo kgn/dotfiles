@@ -1,6 +1,5 @@
 {
   "update.mode": "none",
-  "workbench.colorTheme": "Tokyo Night",
 
   // Minimal UI - no title bar, no window controls
   "window.titleBarStyle": "native",
@@ -63,5 +62,6 @@
     ".codicon-git-branch-staged-changes ~ span": "color: #9ece6a !important;",
     ".action-label[aria-label*=\"*+\"] span:last-child": "color: #e0af68 !important;",
     ".codicon-git-branch-changes ~ span": "color: #e0af68 !important;"
-  }
+  },
+  "workbench.colorTheme": "Tokyo Night"
 }

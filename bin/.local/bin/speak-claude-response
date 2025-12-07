@@ -25,9 +25,6 @@ fi
 touch "$LOCKFILE"
 
 (
-PIPER_VOICE="$HOME/.local/share/piper/voices/en_US-lessac-medium.onnx"
-TMP_WAV="/tmp/speak-response-$$.wav"
-
 transcript_path=$(echo "$input" | jq -r '.transcript_path // empty')
 
 if [ -z "$transcript_path" ] || [ ! -f "$transcript_path" ]; then
@@ -50,7 +47,5 @@ if [ ${#text} -gt 200 ]; then
     fi
 fi
 
-# Speak with Piper
-echo "$text" | piper-tts --model "$PIPER_VOICE" --length_scale 0.7 \
-    --output_file "$TMP_WAV" 2>/dev/null && pw-play "$TMP_WAV"
+echo "$text" | piper-speak
 ) >/dev/null 2>&1 &

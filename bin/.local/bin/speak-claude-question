@@ -9,9 +9,6 @@
 input=$(cat)
 
 (
-PIPER_VOICE="$HOME/.local/share/piper/voices/en_US-lessac-medium.onnx"
-TMP_WAV="/tmp/speak-question-$$.wav"
-
 question=$(echo "$input" | jq -r '.tool_input.questions[0].question // empty')
 
 if [ -z "$question" ]; then
@@ -27,7 +24,5 @@ if [ ${#question} -gt 100 ]; then
     fi
 fi
 
-# Speak with Piper
-echo "$question" | piper-tts --model "$PIPER_VOICE" --length_scale 0.7 \
-    --output_file "$TMP_WAV" 2>/dev/null && pw-play "$TMP_WAV"
+echo "$question" | piper-speak
 ) >/dev/null 2>&1 &
