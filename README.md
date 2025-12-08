@@ -207,5 +207,5 @@ Workarounds or features waiting on upstream changes:
 
 | Issue | Description | Status |
 |-------|-------------|--------|
-| [Wayland Race Fix](feature-requests/hyprwhspr-wayland-race.md) | hyprwhspr service starts before WAYLAND_DISPLAY is set | [PR #35](https://github.com/goodroot/hyprwhspr/pull/35) |
+| [Wayland Race Fix](feature-requests/hyprwhspr-wayland-race.md) | hyprwhspr service starts before WAYLAND_DISPLAY is set | Merged - v1.8.11 |
 | [Hide SCM Input Box](feature-requests/hide-scm-input-box.md) | Hide commit input box in Source Control panel | Closed - use `git.showCommitInput` |

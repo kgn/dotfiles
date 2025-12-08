@@ -1,9 +1,11 @@
 # hyprwhspr: Fix Wayland Environment Race Condition
 
-## Status: Open
+## Status: Merged & Released
 
 - **Pull Request**: https://github.com/goodroot/hyprwhspr/pull/35
 - **Submitted**: 2025-12-07
+- **Merged**: 2025-12-08
+- **Released**: v1.8.11
 
 ---
 
@@ -39,6 +41,6 @@ Benefits:
 2. Handles systems where the graphical session takes longer to initialize
 3. Provides a warning if the environment never becomes available
 
-## Workaround
+## Resolution
 
-Until the PR is merged, `hyprwhspr/setup.sh` clones from the fork and overrides the systemd service file directly (same approach as PR #33 fixes).
+Fix included in hyprwhspr v1.8.11+. Local workaround removed.

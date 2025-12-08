@@ -54,22 +54,17 @@ echo ""
 echo "Step 5: Setting up VS Code..."
 "$DOTFILES_DIR/vscode/setup.sh"
 
-# Step 6: Setup hyprwhspr
+# Step 6: Setup Docker daemon config
 echo ""
-echo "Step 6: Setting up hyprwhspr..."
-"$DOTFILES_DIR/hyprwhspr/setup.sh"
-
-# Step 7: Setup Docker daemon config
-echo ""
-echo "Step 7: Setting up Docker..."
+echo "Step 6: Setting up Docker..."
 "$DOTFILES_DIR/docker/setup.sh"
 
-# Step 8: Set nushell as default shell
+# Step 7: Set nushell as default shell
 if command -v nu &> /dev/null; then
     current_shell=$(getent passwd "$USER" | cut -d: -f7)
     if [ "$current_shell" != "/usr/bin/nu" ]; then
         echo ""
-        echo "Step 9: Setting nushell as default shell..."
+        echo "Step 7: Setting nushell as default shell..."
         sudo chsh -s /usr/bin/nu "$USER"
     fi
 fi
