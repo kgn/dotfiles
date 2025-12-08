@@ -21,7 +21,7 @@ aur_packages=(
     claude-code
     hyprwhspr
     carapace-bin
-    piper-tts-bin
+    piper-speak
     kind
 )
 
