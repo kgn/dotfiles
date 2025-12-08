@@ -207,4 +207,5 @@ Workarounds or features waiting on upstream changes:
 
 | Issue | Description | Status |
 |-------|-------------|--------|
-| [Hide SCM Input Box](feature-requests/hide-scm-input-box.md) | Cannot fully hide commit input boxes in VS Code Source Control panel - CSS hides content but 34px gap remains per repo | [PR #281627](https://github.com/microsoft/vscode/pull/281627) |
+| [Hide SCM Input Box](feature-requests/hide-scm-input-box.md) | Cannot fully hide commit input boxes in VS Code Source Control panel | [PR #281627](https://github.com/microsoft/vscode/pull/281627) |
+| [Wayland Race Fix](feature-requests/hyprwhspr-wayland-race.md) | hyprwhspr service starts before WAYLAND_DISPLAY is set | [PR #35](https://github.com/goodroot/hyprwhspr/pull/35) |
