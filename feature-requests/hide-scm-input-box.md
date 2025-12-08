@@ -1,11 +1,17 @@
 # Feature Request: Hide SCM Input Box
 
-## Status: PR Submitted
+## Status: Closed (Already Exists)
 
 - **VS Code Issue**: https://github.com/microsoft/vscode/issues/281562
 - **VS Code PR**: https://github.com/microsoft/vscode/pull/281627
 - **Submitted**: 2025-12-05
-- **Status**: Awaiting Review
+- **Closed**: 2025-12-08
+- **Resolution**: Setting already exists as `git.showCommitInput`
+
+### Maintainer Response
+
+[Comment from @lszomoru](https://github.com/microsoft/vscode/issues/281562#issuecomment-3625480656):
+The `git.showCommitInput` setting already provides this functionality. No plans to move it to the broader "scm" namespace.
 
 ---
 

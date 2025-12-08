@@ -76,7 +76,7 @@ Minimal UI with custom styling via [Custom UI Style](https://marketplace.visuals
 - Title bar and window controls
 - Menu bar, tabs, breadcrumbs
 - Status bar, minimap, scrollbars
-- SCM commit input box and sync buttons
+- SCM commit input box and action buttons (via native `git.showCommitInput` and `git.showActionButton` settings)
 
 **Git colors** (Tokyo Night theme):
 - Staged: green (`#9ece6a`)
@@ -207,5 +207,5 @@ Workarounds or features waiting on upstream changes:
 
 | Issue | Description | Status |
 |-------|-------------|--------|
-| [Hide SCM Input Box](feature-requests/hide-scm-input-box.md) | Cannot fully hide commit input boxes in VS Code Source Control panel | [PR #281627](https://github.com/microsoft/vscode/pull/281627) |
 | [Wayland Race Fix](feature-requests/hyprwhspr-wayland-race.md) | hyprwhspr service starts before WAYLAND_DISPLAY is set | [PR #35](https://github.com/goodroot/hyprwhspr/pull/35) |
+| [Hide SCM Input Box](feature-requests/hide-scm-input-box.md) | Hide commit input box in Source Control panel | Closed - use `git.showCommitInput` |

@@ -21,6 +21,7 @@
   "workbench.view.alwaysShowHeaderActions": true,
   "scm.defaultViewMode": "tree",
   "scm.showInputActionButton": false,
+  "git.showCommitInput": false,
   "git.showActionButton": {
     "commit": false,
     "publish": false,
@@ -58,7 +59,6 @@
     ".titlebar-container": "display: none !important;",
     ".scm-provider .actions li.action-item:has(.codicon-sync)": "display: none !important;",
     ".scm-provider .actions li.action-item:has(.codicon-check)": "display: none !important;",
-    ".scm-input": "display: none !important;",
     ".codicon-git-branch-staged-changes ~ span": "color: #9ece6a !important;",
     ".action-label[aria-label*=\"*+\"] span:last-child": "color: #e0af68 !important;",
     ".codicon-git-branch-changes ~ span": "color: #e0af68 !important;"
