@@ -1,18 +1,16 @@
 #!/bin/bash
-# Piper TTS setup - voice model installation
+# Piper TTS setup - installs piper-speak from https://github.com/kgn/piper-speak
 
 set -e
 
-echo "Setting up Piper TTS voice..."
-PIPER_VOICE_DIR="$HOME/.local/share/piper/voices"
-PIPER_VOICE="en_US-lessac-medium"
-if [ ! -f "$PIPER_VOICE_DIR/$PIPER_VOICE.onnx" ]; then
-    mkdir -p "$PIPER_VOICE_DIR"
-    echo "  Downloading $PIPER_VOICE voice model..."
-    curl -L "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/medium/en_US-lessac-medium.onnx" \
-        -o "$PIPER_VOICE_DIR/$PIPER_VOICE.onnx"
-    curl -L "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/medium/en_US-lessac-medium.onnx.json" \
-        -o "$PIPER_VOICE_DIR/$PIPER_VOICE.onnx.json"
+PIPER_SPEAK_REPO="$HOME/Development/piper-speak"
+
+echo "Setting up piper-speak..."
+
+if [ ! -d "$PIPER_SPEAK_REPO" ]; then
+    git clone https://github.com/kgn/piper-speak.git "$PIPER_SPEAK_REPO"
 else
-    echo "  Piper voice already installed"
+    git -C "$PIPER_SPEAK_REPO" pull
 fi
+
+"$PIPER_SPEAK_REPO/install.sh"
