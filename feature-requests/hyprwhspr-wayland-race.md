@@ -1,21 +1,20 @@
 # hyprwhspr: Fix Wayland Environment Race Condition
 
-## Status: Merged & Released
+## Status: Follow-up PR Submitted
 
-- **Pull Request**: https://github.com/goodroot/hyprwhspr/pull/35
-- **Submitted**: 2025-12-07
-- **Merged**: 2025-12-08
-- **Released**: v1.8.11
+- **Original PR**: https://github.com/goodroot/hyprwhspr/pull/35 (v1.8.11)
+- **Follow-up PR**: https://github.com/goodroot/hyprwhspr/pull/37
+- **Submitted**: 2025-12-08
 
 ---
 
 ## Summary
 
-Fixed a race condition where the hyprwhspr systemd service starts before `WAYLAND_DISPLAY` is set in the user environment, causing text injection to silently fail.
+Fixed a race condition where the hyprwhspr systemd service starts before Wayland is ready, causing text injection to silently fail.
 
 ## Problem
 
-The service can start before the Wayland environment is fully initialized. When this happens, `wl-copy` fails because it cannot connect to the compositor:
+The service can start before the Wayland compositor is fully initialized. When this happens, `wl-copy` fails because it cannot connect to the compositor:
 
 ```
 Clipboard+hotkey injection failed: Command '['wl-copy']' returned non-zero exit status 1.
@@ -27,20 +26,30 @@ Symptoms:
 - No text is inserted into the focused application
 - Restarting the service after login fixes the issue
 
-## Solution
+## Original Solution (PR #35 - Incomplete)
 
-Replace the fixed 3-second sleep with a loop that waits for `WAYLAND_DISPLAY` to be set (up to 15 seconds):
+The first fix waited for `WAYLAND_DISPLAY` environment variable:
 
 ```ini
-[Service]
 ExecStartPre=/bin/bash -c 'for i in $(seq 1 30); do [ -n "$WAYLAND_DISPLAY" ] && exit 0; sleep 0.5; done; echo "Warning: WAYLAND_DISPLAY not set after 15s"'
 ```
 
-Benefits:
-1. Exits immediately once the environment is ready (faster startup)
-2. Handles systems where the graphical session takes longer to initialize
-3. Provides a warning if the environment never becomes available
+**Why it didn't work:** Systemd user services don't inherit environment variables from the graphical session. The env var is never set in the service's environment, so the check always times out.
 
-## Resolution
+## Correct Solution (PR #37)
 
-Fix included in hyprwhspr v1.8.11+. Local workaround removed.
+Check for the Wayland socket file directly instead of the environment variable:
+
+```ini
+ExecStartPre=/bin/bash -c 'for i in $(seq 1 30); do ls /run/user/$(id -u)/wayland-* >/dev/null 2>&1 && exit 0; sleep 0.5; done; echo "Warning: Wayland socket not found after 15s"'
+```
+
+The socket file (`/run/user/$UID/wayland-*`) is created when the compositor starts and reliably indicates Wayland is ready.
+
+## Workaround
+
+Until PR #37 is merged, restart the service after login:
+
+```bash
+systemctl --user restart hyprwhspr
+```

@@ -41,12 +41,13 @@ for package in "${packages[@]}"; do
 done
 
 # Hypr configs need individual symlinks (directory has other non-managed files)
+# Remove all first, then create all, to avoid partial state during hyprland auto-reload
 echo "  Linking hypr configs..."
 for file in "$DOTFILES_DIR"/hypr/.config/hypr/*.conf; do
-    filename=$(basename "$file")
-    target="$HOME/.config/hypr/$filename"
-    rm -f "$target"
-    ln -sv "$file" "$target"
+    rm -f "$HOME/.config/hypr/$(basename "$file")"
+done
+for file in "$DOTFILES_DIR"/hypr/.config/hypr/*.conf; do
+    ln -sv "$file" "$HOME/.config/hypr/$(basename "$file")"
 done
 
 # Step 5: Setup VS Code
