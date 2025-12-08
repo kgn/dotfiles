@@ -21,23 +21,35 @@ cd ~/dotfiles
 ```
 
 The install script will:
-1. Install additional packages (nushell, vscode, claude-code, hyprwhspr, go, bun)
-2. Remove unwanted packages (1password, libreoffice, signal)
+1. Install additional packages (nushell, vscode, claude-code, hyprwhspr, piper-speak, go, bun)
+2. Remove unused packages (1password, libreoffice, signal)
 3. Stow config files to override Omarchy defaults
 
-## What's Included
+## Packages
+
+| Package | Description |
+|---------|-------------|
+| [nushell](https://www.nushell.sh/) | Modern shell with structured data |
+| [claude-code](https://claude.ai/claude-code) | Claude AI CLI assistant |
+| [hyprwhspr](https://github.com/goodroot/hyprwhspr) | Speech-to-text dictation |
+| [piper-speak](https://github.com/kgn/piper-speak) | Text-to-speech via Piper TTS |
+| [visual-studio-code-bin](https://code.visualstudio.com/) | Code editor |
+| [mise](https://mise.jdx.dev/) | Runtime version manager (Go, Bun) |
+| [atuin](https://atuin.sh/) | Shell history search |
+| [carapace-bin](https://carapace.sh/) | Shell completions |
+
+## Config Directories
 
 | Directory | Description |
 |-----------|-------------|
 | `bash/` | Auto-launches nushell for interactive sessions |
 | `nushell/` | Nushell config with starship, zoxide, mise |
 | `starship/` | Custom prompt with colored segments |
-| `hyprwhspr/` | Speech-to-text with Caps Lock trigger |
+| `hyprwhspr/` | Speech-to-text config (SUPER+. to dictate) |
 | `hypr/` | Hyprland overrides (keybindings, rounded corners) |
 | `vscode/` | VS Code settings (minimal UI, git colors, custom styles) |
 | `mise/` | Runtime version management (Go, Bun) |
 | `claude/` | Claude Code settings and TTS hooks |
-| `piper/` | Piper TTS voice setup |
 | `bin/` | Custom scripts (~/.local/bin) |
 | `scripts/` | Package install/cleanup scripts |
 
@@ -54,7 +66,28 @@ Changed:
 Added:
 - `SUPER SHIFT + V` - VSCode
 - `SUPER + .` - Dictation (hold to record, release to transcribe)
-- `SUPER + SHIFT + .` - Speak selected text via [Piper TTS](https://github.com/rhasspy/piper) (press again to stop)
+- `SUPER + SHIFT + .` - Speak selected text via [piper-speak](https://github.com/kgn/piper-speak) (press again to stop)
+
+## VS Code
+
+Minimal UI with custom styling via [Custom UI Style](https://marketplace.visualstudio.com/items?itemName=nicool.custom-ui-style) extension.
+
+**Hidden elements:**
+- Title bar and window controls
+- Menu bar, tabs, breadcrumbs
+- Status bar, minimap, scrollbars
+- SCM commit input box and sync buttons
+
+**Git colors** (Tokyo Night theme):
+- Staged: green (`#9ece6a`)
+- Modified: yellow (`#e0af68`)
+- Untracked: blue (`#7aa2f7`)
+- Added: cyan (`#73daca`)
+- Deleted: red (`#f7768e`)
+
+**Keybindings:**
+- `Ctrl+Shift+C` - Copy relative file path
+- `Ctrl+O` - Open folder
 
 ## Update
 
@@ -94,7 +127,7 @@ hyprwhspr supports word corrections and custom prompts in `~/.config/hyprwhspr/c
 
 ## Claude Code Hooks
 
-Claude Code is configured with hooks that use [Piper TTS](https://github.com/rhasspy/piper) to speak aloud:
+Claude Code is configured with hooks that use [piper-speak](https://github.com/kgn/piper-speak) to speak aloud:
 
 | Hook | Trigger | Behavior |
 |------|---------|----------|
@@ -158,11 +191,8 @@ dotfiles/
 │   └── config.toml
 ├── claude/.claude/
 │   └── settings.json
-├── piper/
-│   └── setup.sh
 ├── bin/.local/bin/
 │   ├── bt-headset-mode
-│   ├── speak-selection
 │   └── speak-claude-*
 ├── scripts/
 │   ├── packages.sh
