@@ -1,10 +1,11 @@
 # hyprwhspr: Extended Key Support and Input Fixes
 
-## Status: Merged
+## Status: Released
 
 - **Pull Request**: https://github.com/goodroot/hyprwhspr/pull/33
 - **Submitted**: 2025-12-05
 - **Merged**: 2025-12-05
+- **Released**: v1.8.0+
 
 ---
 

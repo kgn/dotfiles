@@ -1,27 +1,27 @@
 #!/bin/bash
-# Setup hyprwhspr with latest features from main branch
+# Setup hyprwhspr with fixes from fork until merged upstream
 #
-# The AUR package (v1.7.2) doesn't yet include PR #33 which adds:
-# - Extended key support (punctuation, numbers)
-# - Key grabbing (prevents shortcut key from being typed)
-# - Exact modifier matching (SUPER+. won't trigger on SUPER+SHIFT+.)
+# Overrides from https://github.com/kgn/hyprwhspr:
+# - PR #35: Fix Wayland environment race condition (wl-copy fails on startup)
 #
-# This script overrides the installed files with the latest main branch.
-# Remove this override once AUR updates to v1.7.3+
+# PR #33 (extended key support, key grabbing) is included in v1.8.0+
+#
+# See feature-requests/hyprwhspr-*.md for details.
 
 set -e
 
 HYPRWHSPR_REPO="$HOME/Development/hyprwhspr"
 
-echo "Updating hyprwhspr with latest main branch..."
+echo "Setting up hyprwhspr fixes..."
 
 if [ ! -d "$HYPRWHSPR_REPO" ]; then
-    git clone https://github.com/goodroot/hyprwhspr.git "$HYPRWHSPR_REPO"
+    git clone https://github.com/kgn/hyprwhspr.git "$HYPRWHSPR_REPO"
 else
     git -C "$HYPRWHSPR_REPO" pull
 fi
 
-sudo cp "$HYPRWHSPR_REPO/lib/src/global_shortcuts.py" /usr/lib/hyprwhspr/lib/src/
-sudo cp "$HYPRWHSPR_REPO/lib/main.py" /usr/lib/hyprwhspr/lib/
+# Override systemd service (PR #35 - not yet merged)
+cp "$HYPRWHSPR_REPO/config/systemd/hyprwhspr.service" "$HOME/.config/systemd/user/"
+systemctl --user daemon-reload
 
-echo "hyprwhspr updated with extended key support and key grabbing"
+echo "hyprwhspr systemd service updated"
