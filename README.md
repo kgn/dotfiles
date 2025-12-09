@@ -30,13 +30,16 @@ The install script will:
 | Package | Description |
 |---------|-------------|
 | [nushell](https://www.nushell.sh/) | Modern shell with structured data |
-| [claude-code](https://claude.ai/claude-code) | Claude AI CLI assistant |
+| [claude-code](https://claude.ai/claude-code) | CLI assistant |
 | [hyprwhspr](https://github.com/goodroot/hyprwhspr) | Speech-to-text dictation |
 | [piper-speak](https://github.com/kgn/piper-speak) | Text-to-speech via Piper TTS |
 | [visual-studio-code-bin](https://code.visualstudio.com/) | Code editor |
-| [mise](https://mise.jdx.dev/) | Runtime version manager (Go, Bun) |
+| [mise](https://mise.jdx.dev/) | Runtime version manager (Go, Bun, Node) |
 | [atuin](https://atuin.sh/) | Shell history search |
 | [carapace-bin](https://carapace.sh/) | Shell completions |
+| [pass](https://www.passwordstore.org/) | Password manager |
+| [kubectl](https://kubernetes.io/docs/reference/kubectl/) | Kubernetes CLI |
+| [kind](https://kind.sigs.k8s.io/) | Kubernetes in Docker |
 
 ## Config Directories
 
@@ -46,27 +49,29 @@ The install script will:
 | `nushell/` | Nushell config with starship, zoxide, mise |
 | `starship/` | Custom prompt with colored segments |
 | `hyprwhspr/` | Speech-to-text config (SUPER+. to dictate) |
-| `hypr/` | Hyprland overrides (keybindings, rounded corners) |
+| `hypr/` | Hyprland overrides (keybindings, input, look and feel) |
 | `vscode/` | VS Code settings (minimal UI, git colors, custom styles) |
-| `mise/` | Runtime version management (Go, Bun) |
+| `mise/` | Runtime version management (Go, Bun, Node) |
 | `claude/` | Claude Code settings and TTS hooks |
+| `waybar/` | Custom waybar config |
+| `docker/` | Docker daemon config (registry mirror, log rotation) |
 | `bin/` | Custom scripts (~/.local/bin) |
 | `scripts/` | Package install/cleanup scripts |
+| `feature-requests/` | Tracking upstream feature requests |
 
 ## Keybinding Changes
 
-Removed:
-- `SUPER SHIFT + G` - Signal (removed)
-- `SUPER SHIFT + /` - 1Password (removed)
-
-Changed:
+Changed from default Omarchy:
 - `SUPER SHIFT + C` - Google Calendar (was HEY)
 - `SUPER SHIFT + E` - Gmail (was HEY)
+- `SUPER SHIFT + G` - GitHub (was Signal)
+- `SUPER SHIFT + /` - pass (was 1Password)
+- `SUPER SHIFT + N` - VS Code
+- `SUPER SHIFT ALT + A` - Claude (was Grok)
 
 Added:
-- `SUPER SHIFT + V` - VSCode
 - `SUPER + .` - Dictation (hold to record, release to transcribe)
-- `SUPER + SHIFT + .` - Speak selected text via [piper-speak](https://github.com/kgn/piper-speak) (press again to stop)
+- `SUPER SHIFT + .` - Speak selected text via [piper-speak](https://github.com/kgn/piper-speak) (press again to stop)
 
 ## VS Code
 
@@ -88,6 +93,11 @@ Minimal UI with custom styling via [Custom UI Style](https://marketplace.visuals
 **Keybindings:**
 - `Ctrl+Shift+C` - Copy relative file path
 - `Ctrl+O` - Open folder
+
+**Extensions installed by setup:**
+- Tokyo Night theme
+- Custom UI Style
+- Go, Python, ESLint, Prettier, Docker
 
 ## Update
 
@@ -184,28 +194,38 @@ dotfiles/
 ├── hyprwhspr/.config/hyprwhspr/config.json
 ├── hypr/.config/hypr/
 │   ├── bindings.conf
-│   └── looknfeel.conf
-├── vscode/.config/Code/User/
-│   └── settings.json
-├── mise/.config/mise/
-│   └── config.toml
-├── claude/.claude/
-│   └── settings.json
+│   ├── input.conf
+│   ├── looknfeel.conf
+│   └── windows.conf
+├── vscode/
+│   ├── .config/Code/User/settings.json
+│   ├── extensions/          # Custom extensions
+│   └── setup.sh             # Extension installer
+├── mise/
+│   ├── .config/mise/config.toml
+│   └── setup.sh             # Go tools installer
+├── waybar/.config/waybar/config.jsonc
+├── docker/
+│   ├── daemon.json
+│   └── setup.sh
+├── claude/.claude/settings.json
 ├── bin/.local/bin/
 │   ├── bt-headset-mode
 │   └── speak-claude-*
 ├── scripts/
 │   ├── packages.sh
 │   └── cleanup.sh
+├── feature-requests/        # Upstream feature tracking
 ├── install.sh
 └── README.md
 ```
 
 ## Outstanding Enhancements
 
-Workarounds or features waiting on upstream changes:
+Feature requests and upstream contributions:
 
 | Issue | Description | Status |
 |-------|-------------|--------|
+| [Key Grabbing](feature-requests/hyprwhspr-key-grabbing.md) | Extended key support and input fixes for hyprwhspr | Merged - v1.8.0 |
 | [Wayland Race Fix](feature-requests/hyprwhspr-wayland-race.md) | hyprwhspr service starts before WAYLAND_DISPLAY is set | Merged - v1.8.11 |
 | [Hide SCM Input Box](feature-requests/hide-scm-input-box.md) | Hide commit input box in Source Control panel | Closed - use `git.showCommitInput` |

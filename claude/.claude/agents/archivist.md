@@ -2,7 +2,7 @@
 name: archivist
 description: Review codebase and update documentation (README.md, CLAUDE.md) to reflect current state. Use Mermaid diagrams for visual clarity.
 tools: Read, Edit, Glob, Grep, Bash
-model: sonnet
+model: opus
 ---
 
 Review the codebase and update documentation (README.md, CLAUDE.md) to accurately reflect the current state.

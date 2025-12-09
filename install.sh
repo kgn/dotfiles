@@ -49,6 +49,7 @@ done
 for file in "$DOTFILES_DIR"/hypr/.config/hypr/*.conf; do
     ln -sv "$file" "$HOME/.config/hypr/$(basename "$file")"
 done
+hyprctl reload 2>/dev/null || true
 
 # Step 5: Setup VS Code
 echo ""

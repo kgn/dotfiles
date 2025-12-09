@@ -1,0 +1,31 @@
+{
+  "Claude Review Comment": {
+    "prefix": "cl",
+    "body": ["// CLAUDE: $1"],
+    "description": "Insert a CLAUDE review comment"
+  },
+  "Claude Review Comment (Hash)": {
+    "prefix": "cl",
+    "body": ["# CLAUDE: $1"],
+    "scope": "python,ruby,shellscript,bash,yaml,toml,perl,r,makefile,dockerfile,coffeescript",
+    "description": "Insert a CLAUDE review comment (hash style)"
+  },
+  "Claude Review Comment (HTML)": {
+    "prefix": "cl",
+    "body": ["<!-- CLAUDE: $1 -->"],
+    "scope": "html,xml,markdown,svg",
+    "description": "Insert a CLAUDE review comment (HTML style)"
+  },
+  "Claude Review Comment (CSS)": {
+    "prefix": "cl",
+    "body": ["/* CLAUDE: $1 */"],
+    "scope": "css,scss,less",
+    "description": "Insert a CLAUDE review comment (CSS style)"
+  },
+  "Claude Review Comment (Lua)": {
+    "prefix": "cl",
+    "body": ["-- CLAUDE: $1"],
+    "scope": "lua,sql,haskell",
+    "description": "Insert a CLAUDE review comment (Lua/SQL style)"
+  }
+}
