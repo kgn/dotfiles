@@ -1,231 +1,100 @@
 # Dotfiles
 
-Personal Omarchy customizations managed with [GNU Stow](https://www.gnu.org/software/stow/).
-
-This repo overlays on top of a standard Omarchy installation - no fork required.
+Personal [Omarchy](https://omarchy.org) customizations managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Install
 
 ```bash
-# 1. Install Omarchy (standard installation from ISO or online)
-# https://omarchy.org
-
-# 2. Clone dotfiles
 git clone https://github.com/kgn/dotfiles ~/dotfiles
-
-# 3. Run install script
-cd ~/dotfiles
-./install.sh
-
-# 4. Log out and back in
+cd ~/dotfiles && ./install.sh
+# Log out and back in
 ```
 
-The install script will:
-1. Install additional packages (nushell, vscode, claude-code, hyprwhspr, piper-speak, go, bun)
-2. Remove unused packages (1password, libreoffice, signal)
-3. Stow config files to override Omarchy defaults
+## Install Flow
 
-## Packages
+```mermaid
+flowchart LR
+    A[packages.sh] --> B[mise/setup.sh]
+    B --> C[cleanup.sh]
+    C --> D[stow packages]
+    D --> E[vscode/setup.sh]
+    E --> F[docker/setup.sh]
+    F --> G[set nushell as default]
+```
 
-| Package | Description |
-|---------|-------------|
-| [nushell](https://www.nushell.sh/) | Modern shell with structured data |
-| [claude-code](https://claude.ai/claude-code) | CLI assistant |
-| [hyprwhspr](https://github.com/goodroot/hyprwhspr) | Speech-to-text dictation |
-| [piper-speak](https://github.com/kgn/piper-speak) | Text-to-speech via Piper TTS |
-| [visual-studio-code-bin](https://code.visualstudio.com/) | Code editor |
-| [mise](https://mise.jdx.dev/) | Runtime version manager (Go, Bun, Node) |
-| [atuin](https://atuin.sh/) | Shell history search |
-| [carapace-bin](https://carapace.sh/) | Shell completions |
-| [pass](https://www.passwordstore.org/) | Password manager |
-| [kubectl](https://kubernetes.io/docs/reference/kubectl/) | Kubernetes CLI |
-| [kind](https://kind.sigs.k8s.io/) | Kubernetes in Docker |
+## Packages Installed
 
-## Config Directories
+**Pacman:** nushell, stow, pass, atuin, protobuf, kubectl
 
-| Directory | Description |
-|-----------|-------------|
-| `bash/` | Auto-launches nushell for interactive sessions |
-| `nushell/` | Nushell config with starship, zoxide, mise |
-| `starship/` | Custom prompt with colored segments |
-| `hyprwhspr/` | Speech-to-text config (SUPER+. to dictate) |
-| `hypr/` | Hyprland overrides (keybindings, input, look and feel) |
-| `vscode/` | VS Code settings (minimal UI, git colors, custom styles) |
-| `mise/` | Runtime version management (Go, Bun, Node) |
-| `claude/` | Claude Code settings and TTS hooks |
-| `waybar/` | Custom waybar config |
-| `docker/` | Docker daemon config (registry mirror, log rotation) |
-| `bin/` | Custom scripts (~/.local/bin) |
-| `scripts/` | Package install/cleanup scripts |
-| `feature-requests/` | Tracking upstream feature requests |
+**AUR:** visual-studio-code-bin, claude-code, hyprwhspr, carapace-bin, piper-speak, kind
 
-## Keybinding Changes
+**Removed:** 1password, bitwarden, libreoffice, obsidian, signal, tobi-try, ruby
 
-Changed from default Omarchy:
-- `SUPER SHIFT + C` - Google Calendar (was HEY)
-- `SUPER SHIFT + E` - Gmail (was HEY)
-- `SUPER SHIFT + G` - GitHub (was Signal)
-- `SUPER SHIFT + /` - pass (was 1Password)
-- `SUPER SHIFT + N` - VS Code
-- `SUPER SHIFT ALT + A` - Claude (was Grok)
+## Directory Structure
 
-Added:
-- `SUPER + .` - Dictation (hold to record, release to transcribe)
-- `SUPER SHIFT + .` - Speak selected text via [piper-speak](https://github.com/kgn/piper-speak) (press again to stop)
+| Directory | Stowed | Description |
+|-----------|--------|-------------|
+| `bash/` | Yes | Launches nushell for interactive sessions |
+| `nushell/` | Yes | Shell config with starship, zoxide, mise, atuin |
+| `starship/` | Yes | Custom prompt |
+| `hyprwhspr/` | Yes | Speech-to-text config |
+| `vscode/` | Yes | VS Code settings + custom extensions |
+| `mise/` | Yes | Runtime versions (Go, Bun, Node) + Go tools |
+| `bin/` | Yes | Scripts for `~/.local/bin` |
+| `claude/` | Yes | Claude Code settings, hooks, agents, commands |
+| `waybar/` | Yes | Status bar config |
+| `hypr/` | No | Symlinked individually (bindings, input, looknfeel, windows) |
+| `docker/` | No | Setup script symlinks daemon.json to /etc/docker |
+| `scripts/` | -- | Helper scripts for install.sh |
+| `feature-requests/` | -- | Upstream feature tracking |
+
+## Keybindings
+
+| Key | Action |
+|-----|--------|
+| `SUPER SHIFT + N` | VS Code |
+| `SUPER SHIFT + /` | pass (passwords) |
+| `SUPER SHIFT + C` | Google Calendar |
+| `SUPER SHIFT + E` | Gmail |
+| `SUPER SHIFT + G` | GitHub |
+| `SUPER SHIFT + A` | ChatGPT |
+| `SUPER SHIFT ALT + A` | Claude |
+| `SUPER SHIFT + X` | X (Twitter) |
+| `SUPER SHIFT ALT + X` | X Post |
+| `SUPER + .` | Dictation (hold to record) |
+| `SUPER SHIFT + .` | Speak selected text |
 
 ## VS Code
 
-Minimal UI with custom styling via [Custom UI Style](https://marketplace.visualstudio.com/items?itemName=nicool.custom-ui-style) extension.
+Minimal UI with Tokyo Night theme. Hidden: title bar, menu bar, tabs, breadcrumbs, status bar, minimap, scrollbars, SCM input box.
 
-**Hidden elements:**
-- Title bar and window controls
-- Menu bar, tabs, breadcrumbs
-- Status bar, minimap, scrollbars
-- SCM commit input box and action buttons (via native `git.showCommitInput` and `git.showActionButton` settings)
+**Extensions:** Tokyo Night, Custom UI Style, Go, Python, ESLint, Prettier, Docker
 
-**Git colors** (Tokyo Night theme):
-- Staged: green (`#9ece6a`)
-- Modified: yellow (`#e0af68`)
-- Untracked: blue (`#7aa2f7`)
-- Added: cyan (`#73daca`)
-- Deleted: red (`#f7768e`)
+**Custom extension:** `copy-relative-path-scm` - copy relative path from Source Control
 
-**Keybindings:**
-- `Ctrl+Shift+C` - Copy relative file path
-- `Ctrl+O` - Open folder
+## Claude Code
 
-**Extensions installed by setup:**
-- Tokyo Night theme
-- Custom UI Style
-- Go, Python, ESLint, Prettier, Docker
+Configuration includes TTS hooks via [piper-speak](https://github.com/kgn/piper-speak) for hands-free awareness:
 
-## Update
+- Questions and permission prompts are spoken aloud
+- Responses summarized and spoken when complete
 
-```bash
-cd ~/dotfiles
-git pull
-./install.sh
-```
+**Agents:** `archivist`, `file-splitter`, `security-reviewer`
 
-## Bluetooth Headset Mic
+**Commands:** `claude-review`, `git-commit`
 
-To use a Bluetooth headset's microphone (for dictation/speech-to-text):
+## Utilities
 
-```bash
-bt-headset-mode on   # Enable mic (lower audio quality)
-bt-headset-mode off  # High quality audio (no mic)
-```
-
-Note: Bluetooth can't do high quality audio AND mic simultaneously.
-
-## Dictation Customization
-
-hyprwhspr supports word corrections and custom prompts in `~/.config/hyprwhspr/config.json`:
-
-```json
-{
-    "word_overrides": {
-        "val runner": "val-runner",
-        "hyper whisper": "hyprwhspr"
-    },
-    "whisper_prompt": "Transcribe code terms: val-runner, hyprwhspr, Hyprland."
-}
-```
-
-- **word_overrides** - Auto-replace transcribed words (corrections file)
-- **whisper_prompt** - Guide Whisper with context about expected terms
-
-## Claude Code Hooks
-
-Claude Code is configured with hooks that use [piper-speak](https://github.com/kgn/piper-speak) to speak aloud:
-
-| Hook | Trigger | Behavior |
-|------|---------|----------|
-| `PreToolUse` | AskUserQuestion tool | Speaks the question (summarized via Haiku if >100 chars) |
-| `PermissionRequest` | Any permission prompt | Speaks the tool description |
-| `Stop` | Response complete | Speaks the response (summarized via Haiku if >200 chars) |
-
-This enables hands-free awareness of Claude's status while multitasking.
-
-Configuration in `~/.claude/settings.json`:
-
-```json
-{
-  "hooks": {
-    "PreToolUse": [{
-      "matcher": "AskUserQuestion",
-      "hooks": [{ "type": "command", "command": "speak-claude-question" }]
-    }],
-    "PermissionRequest": [{
-      "hooks": [{ "type": "command", "command": "speak-claude-permission" }]
-    }],
-    "Stop": [{
-      "hooks": [{ "type": "command", "command": "speak-claude-response" }]
-    }]
-  }
-}
-```
+| Script | Description |
+|--------|-------------|
+| `bt-headset-mode on/off` | Toggle Bluetooth headset mic mode |
+| `speak-claude-*` | TTS hooks for Claude Code |
 
 ## Manual Commands
 
 ```bash
-# Stow a single package
-stow -t ~ nushell
-
-# Remove a stowed package
-stow -t ~ -D nushell
-
-# Install only packages (no stow)
-./scripts/packages.sh
-
-# Remove unwanted packages only
-./scripts/cleanup.sh
+stow -t ~ nushell        # Stow a single package
+stow -t ~ -D nushell     # Remove a stowed package
+./scripts/packages.sh    # Install packages only
+./scripts/cleanup.sh     # Remove unwanted packages only
 ```
-
-## Structure
-
-```
-dotfiles/
-├── bash/.bashrc
-├── nushell/.config/nushell/
-│   ├── config.nu
-│   └── env.nu
-├── starship/.config/starship.toml
-├── hyprwhspr/.config/hyprwhspr/config.json
-├── hypr/.config/hypr/
-│   ├── bindings.conf
-│   ├── input.conf
-│   ├── looknfeel.conf
-│   └── windows.conf
-├── vscode/
-│   ├── .config/Code/User/settings.json
-│   ├── extensions/          # Custom extensions
-│   └── setup.sh             # Extension installer
-├── mise/
-│   ├── .config/mise/config.toml
-│   └── setup.sh             # Go tools installer
-├── waybar/.config/waybar/config.jsonc
-├── docker/
-│   ├── daemon.json
-│   └── setup.sh
-├── claude/.claude/settings.json
-├── bin/.local/bin/
-│   ├── bt-headset-mode
-│   └── speak-claude-*
-├── scripts/
-│   ├── packages.sh
-│   └── cleanup.sh
-├── feature-requests/        # Upstream feature tracking
-├── install.sh
-└── README.md
-```
-
-## Outstanding Enhancements
-
-Feature requests and upstream contributions:
-
-| Issue | Description | Status |
-|-------|-------------|--------|
-| [Key Grabbing](feature-requests/hyprwhspr-key-grabbing.md) | Extended key support and input fixes for hyprwhspr | Merged - v1.8.0 |
-| [Wayland Race Fix](feature-requests/hyprwhspr-wayland-race.md) | hyprwhspr service starts before WAYLAND_DISPLAY is set | Merged - v1.8.11 |
-| [Hide SCM Input Box](feature-requests/hide-scm-input-box.md) | Hide commit input box in Source Control panel | Closed - use `git.showCommitInput` |
