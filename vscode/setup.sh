@@ -21,6 +21,7 @@ install_ext ms-python.python
 install_ext dbaeumer.vscode-eslint
 install_ext prettier.prettier-vscode
 install_ext ms-azuretools.vscode-docker
+install_ext ms-vscode-remote.remote-containers
 
 # Grant permissions for Custom UI Style extension to modify VS Code
 if [ -d "/opt/visual-studio-code/resources/app" ]; then
