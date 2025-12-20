@@ -63,5 +63,7 @@
     ".action-label[aria-label*=\"*+\"] span:last-child": "color: #e0af68 !important;",
     ".codicon-git-branch-changes ~ span": "color: #e0af68 !important;"
   },
+  "go.toolsManagement.autoUpdate": true,
+  "go.diagnostic.vulncheck": "Imports",
   "workbench.colorTheme": "Tokyo Night"
 }
