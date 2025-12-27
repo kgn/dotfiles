@@ -9,7 +9,9 @@ packages=(
     1password-beta
     1password-cli
     bitwarden
+    discord
     libreoffice-fresh
+    neovim
     obsidian
     signal-desktop
     tobi-try
@@ -37,6 +39,10 @@ echo "Removing unwanted web apps..."
 webapps=(
     "HEY"
     "Basecamp"
+    "Google Contacts"
+    "Google Photos"
+    "Google Messages"
+    "WhatsApp"
 )
 
 for app in "${webapps[@]}"; do
