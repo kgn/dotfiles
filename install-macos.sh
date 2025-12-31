@@ -28,6 +28,11 @@ brew install nushell atuin zoxide
 
 # TTS for Claude Code hooks (piper via pip)
 pip3 install piper-tts
+# Symlink piper to /usr/local/bin (pip installs to user site-packages bin)
+PIPER_BIN=$(python3 -m site --user-base)/bin/piper
+if [ -f "$PIPER_BIN" ]; then
+    sudo ln -sf "$PIPER_BIN" /usr/local/bin/piper
+fi
 
 # Install casks (skip if already installed)
 brew install --cask visual-studio-code 2>/dev/null || true
