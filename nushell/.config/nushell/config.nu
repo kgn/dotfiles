@@ -75,9 +75,13 @@ def n [...args] {
     }
 }
 
-# Open files with default application
-def open [...args] {
-    xdg-open ...$args out+err> /dev/null &
+# Open files with default application (Linux only, macOS has native 'open')
+def --env xopen [...args] {
+    if (sys host | get name) == "Linux" {
+        xdg-open ...$args out+err> /dev/null &
+    } else {
+        ^open ...$args
+    }
 }
 
 # ===== Integrations =====

@@ -17,7 +17,11 @@ fi
 # Debounce: skip if we spoke within last 5 seconds
 LOCKFILE="/tmp/speak-response-lock"
 if [ -f "$LOCKFILE" ]; then
-    lock_age=$(($(date +%s) - $(stat -c %Y "$LOCKFILE")))
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        lock_age=$(($(date +%s) - $(stat -f %m "$LOCKFILE")))
+    else
+        lock_age=$(($(date +%s) - $(stat -c %Y "$LOCKFILE")))
+    fi
     if [ "$lock_age" -lt 5 ]; then
         exit 0
     fi

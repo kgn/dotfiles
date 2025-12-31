@@ -4,7 +4,6 @@
   // Minimal UI - no title bar, no window controls
   "window.titleBarStyle": "native",
   "window.menuBarVisibility": "hidden",
-  "window.customTitleBarVisibility": "never",
   "workbench.layoutControl.enabled": false,
   "window.commandCenter": false,
   "editor.minimap.enabled": false,
@@ -65,5 +64,6 @@
   },
   "go.toolsManagement.autoUpdate": true,
   "go.diagnostic.vulncheck": "Imports",
-  "workbench.colorTheme": "Tokyo Night"
+  "workbench.colorTheme": "Tokyo Night",
+  "workbench.secondarySideBar.defaultVisibility": "hidden"
 }

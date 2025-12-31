@@ -14,6 +14,8 @@ $env.XDG_CACHE_HOME = ($env.HOME | path join ".cache")
 $env.PATH = ($env.PATH | split row (char esep) | prepend [
     ($env.HOME | path join ".local/bin")
     ($env.HOME | path join ".cargo/bin")
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
     "/usr/local/bin"
 ])
 
@@ -39,14 +41,20 @@ if (which mise | is-not-empty) {
 # Zoxide
 if (which zoxide | is-not-empty) {
     zoxide init nushell | save -f ~/.cache/zoxide.nu
+} else {
+    "" | save -f ~/.cache/zoxide.nu
 }
 
 # Carapace (completions)
 if (which carapace | is-not-empty) {
     carapace _carapace nushell | save -f ~/.cache/carapace.nu
+} else {
+    "" | save -f ~/.cache/carapace.nu
 }
 
 # Atuin (shell history)
 if (which atuin | is-not-empty) {
     atuin init nu | save -f ~/.cache/atuin.nu
+} else {
+    "" | save -f ~/.cache/atuin.nu
 }
