@@ -18,6 +18,11 @@ echo ""
 echo "Step 2: Setting up mise..."
 "$DOTFILES_DIR/mise/setup.sh"
 
+# Step 2a: Setup Claude Code MCP servers
+echo ""
+echo "Step 2a: Setting up Claude Code MCP servers..."
+"$DOTFILES_DIR/claude/setup-mcp.sh"
+
 # Step 3: Remove unwanted packages
 echo ""
 echo "Step 3: Cleaning up unwanted packages..."

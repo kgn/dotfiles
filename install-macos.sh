@@ -74,6 +74,13 @@ if [ -f "$DOTFILES_DIR/mise/setup.sh" ]; then
     "$DOTFILES_DIR/mise/setup.sh"
 fi
 
+# Step 4a: Setup Claude Code MCP servers
+echo ""
+echo "Step 4a: Setting up Claude Code MCP servers..."
+if [ -f "$DOTFILES_DIR/claude/setup-mcp.sh" ]; then
+    "$DOTFILES_DIR/claude/setup-mcp.sh"
+fi
+
 # Step 5: Setup VS Code (different path on macOS)
 echo ""
 echo "Step 5: Setting up VS Code..."
