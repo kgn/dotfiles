@@ -21,7 +21,7 @@ fi
 # Step 2: Install packages
 echo ""
 echo "Step 2: Installing packages..."
-brew install stow mise starship
+brew install stow mise starship protobuf bufbuild/buf/buf kind istioctl
 
 # Shell and tools
 brew install nushell atuin zoxide

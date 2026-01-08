@@ -23,6 +23,7 @@ aur_packages=(
     carapace-bin
     piper-speak
     kind
+    buf
 )
 
 echo "Syncing package database..."
