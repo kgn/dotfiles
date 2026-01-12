@@ -12,9 +12,6 @@
   "editor.scrollbar.horizontal": "hidden",
   "workbench.statusBar.visible": false,
   "workbench.editor.showTabs": "none",
-
-  // Activity bar icons at top of sidebar
-  "workbench.activityBar.location": "top",
   "workbench.sideBar.location": "left",
   "workbench.startupEditor": "none",
   "workbench.view.alwaysShowHeaderActions": true,
@@ -68,5 +65,6 @@
   "editor.accessibilitySupport": "on",
   "claudeCode.preferredLocation": "panel",
   "claudeCode.selectedModel": "default",
-  "workbench.colorTheme": "Tokyo Night"
+  "workbench.colorTheme": "Tokyo Night",
+  "workbench.activityBar.location": "top"
 }
