@@ -2,3 +2,4 @@
 go = "latest"
 bun = "latest"
 node = "latest"
+protoc = "33.2"

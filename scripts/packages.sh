@@ -13,6 +13,7 @@ pacman_packages=(
     atuin
     protobuf
     kubectl
+    istio
 )
 
 # Packages from AUR (installed via yay)

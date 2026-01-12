@@ -64,9 +64,9 @@
   },
   "go.toolsManagement.autoUpdate": true,
   "go.diagnostic.vulncheck": "Imports",
-  "workbench.colorTheme": "Tokyo Night",
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "editor.accessibilitySupport": "on",
   "claudeCode.preferredLocation": "panel",
-  "claudeCode.selectedModel": "default"
+  "claudeCode.selectedModel": "default",
+  "workbench.colorTheme": "Tokyo Night"
 }
