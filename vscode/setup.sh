@@ -29,8 +29,12 @@ if [ -d "/opt/visual-studio-code/resources/app" ]; then
     sudo chown -R "$(whoami)" '/opt/visual-studio-code/resources/app'
 fi
 
-# Copy custom extensions
+# Install custom extensions (using publisher.name-version directory naming)
 if [ -d "$DOTFILES_DIR/vscode/extensions" ]; then
     echo "Installing custom VS Code extensions from dotfiles..."
-    cp -r "$DOTFILES_DIR/vscode/extensions"/* "$HOME/.vscode/extensions/"
+    for ext_dir in "$DOTFILES_DIR/vscode/extensions"/*/; do
+        pkg=$(jq -r '"\(.publisher).\(.name)-\(.version)"' "$ext_dir/package.json")
+        rm -rf "$HOME/.vscode/extensions/$pkg"
+        cp -r "$ext_dir" "$HOME/.vscode/extensions/$pkg"
+    done
 fi
