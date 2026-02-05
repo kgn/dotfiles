@@ -40,6 +40,14 @@ for package in "${packages[@]}"; do
         echo "  Stowing $package..."
         # First unstow to clean up any existing links
         stow -D --target="$HOME" "$package" 2>/dev/null || true
+        # Remove any existing non-symlink files that would conflict with stow
+        while IFS= read -r target; do
+            target="$HOME/$target"
+            if [ -e "$target" ] && [ ! -L "$target" ]; then
+                echo "    Removing conflicting file: $target"
+                rm -f "$target"
+            fi
+        done < <(cd "$DOTFILES_DIR/$package" && find . -type f ! -name 'setup.sh' | sed 's|^\./||')
         # Then stow fresh (ignore setup.sh scripts which are run separately)
         stow -v --ignore='setup\.sh' --target="$HOME" "$package"
     fi

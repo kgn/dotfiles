@@ -11,7 +11,6 @@ packages=(
     bitwarden
     discord
     libreoffice-fresh
-    neovim
     obsidian
     signal-desktop
     tobi-try
