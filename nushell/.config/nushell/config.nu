@@ -60,6 +60,7 @@ alias ... = cd ../..
 alias .... = cd ../../..
 
 # Tools
+alias m = mise run
 alias d = docker
 alias g = git
 alias gcm = git commit -m
